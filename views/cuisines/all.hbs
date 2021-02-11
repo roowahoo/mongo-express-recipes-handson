@@ -1,0 +1,9 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+<ul>
+    {{#each cuisines}}
+    <li>{{this.name}} ({{this._id}})</li>
+    {{/each}}
+</ul>
+{{/block}}
+{{/extends}}

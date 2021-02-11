@@ -1,0 +1,12 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+<form method='POST'>
+    <div class='m-3'>
+        <label>Cuisine name:</label>
+        <input type='text' class='form-control' name='cuisineName' value='{{cuisine.name}}'>
+    </div>
+    <input type='submit' value='Update' class='btn btn-primary m-3'>
+
+</form>
+{{/block}}
+{{/extends}}

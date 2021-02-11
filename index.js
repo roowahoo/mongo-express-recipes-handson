@@ -27,7 +27,7 @@ app.use(
 );
 
 async function main() {
-  let db = await MongoUtil.connect(mongoUrl, "tgc11_recipes");
+  let db = await MongoUtil.connect(mongoUrl, "recipes_app");
 
   // MongoDB is connected and alive
 
@@ -53,6 +53,7 @@ async function main() {
       .find({}) // find all the ingredient with no criteria
       .toArray(); // convert to array
 
+      console.log(ingredients)
     res.render('ingredients/all', {
         'everything': ingredients
     })
@@ -104,6 +105,72 @@ async function main() {
 
       res.redirect('/ingredients')
   })
+
+  app.get('/cuisines/create',(req,res)=>{
+      res.render('cuisines/create')
+
+
+  })
+
+  app.post('/cuisines/create', async (req,res)=>{
+      await db.collection('cuisines').insertOne({
+          name:req.body.cuisineName
+      })
+      res.redirect('/cuisines')
+  })
+
+  app.get('/cuisines', async (req,res)=>{
+      let cuisines=await db.collection('cuisines').find({}).toArray()
+      res.render('cuisines/all',{             // cuisines/all is your own folders path
+          'cuisines':cuisines                 //'cuisines' becomes the array of cuisines that you just got
+      })                                      //#each of 'cuisines' will be rendered in the unordered list in all.hbs
+
+  })
+
+  app.get('/cuisines/delete/:cuisine_id', async(req,res)=>{
+      let id=req.params.cuisine_id  //retreiving id of cuisine that user typed into url
+      let cuisine=await db.collection('cuisines').findOne({  
+          '_id':ObjectId(id)        //format of ids in mongo atlas
+      })
+      res.render('cuisines/delete',{  //cuisines/delete is your own folders path
+          'cuisine':cuisine
+      }) 
+    
+  })
+
+  app.post('/cuisines/delete/:cuisine_id', async (req,res)=>{
+      let id=req.params.cuisine_id
+      await db.collection('cuisines').remove({
+          '_id':ObjectId(id)
+      })
+      res.redirect('/cuisines')
+  })
+
+  app.get('/cuisines/update/:cuisine_id',async (req,res)=>{
+      let id=req.params.cuisine_id
+      let cuisine=await db.collection('cuisines').findOne({
+          '_id':ObjectId(id)
+      })
+      res.render('cuisines/update',{
+          'cuisine':cuisine
+      })
+  })
+
+  app.post('/cuisines/update/:cuisine_id', (req,res)=>{
+      let id=req.params.cuisine_id
+      let newCuisineName=req.body.cuisineName
+      db.collection('cuisines').updateOne({
+          '_id': ObjectId(id)
+      },{
+          '$set':{
+              'name':newCuisineName
+          }
+      })
+      res.redirect('/cuisines')
+  })
+
+
+
 
 }
 

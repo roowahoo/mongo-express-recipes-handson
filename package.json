@@ -1,9 +1,10 @@
 {
   "name": "08-express-mongo",
   "version": "1.0.0",
-  "description": "",
+  "description": "![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,5 +16,14 @@
     "hbs": "^4.1.1",
     "mongodb": "^3.6.4",
     "wax-on": "^1.2.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roowahoo/mongo-express-recipes-handson.git"
+  },
+  "bugs": {
+    "url": "https://github.com/roowahoo/mongo-express-recipes-handson/issues"
+  },
+  "homepage": "https://github.com/roowahoo/mongo-express-recipes-handson#readme",
+  "devDependencies": {}
 }
