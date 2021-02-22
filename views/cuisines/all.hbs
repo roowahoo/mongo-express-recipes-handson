@@ -3,6 +3,10 @@
 <ul>
     {{#each cuisines}}
     <li>{{this.name}} ({{this._id}})</li>
+    <a class="btn btn-success" href="/cuisines/update/{{this._id}}">Edit</a>
+    <a class="btn btn-danger" href="/cuisines/delete/{{this._id}}">Delete</a>
+    <a class="btn btn-primary" href="/cuisines/comments/{{this._id}}/add">Add Comment</a>
+    <a class="btn btn-primary" href="/cuisines/comments/{{this._id}}/all_comments">Show All Comments</a>
     {{/each}}
 </ul>
 {{/block}}

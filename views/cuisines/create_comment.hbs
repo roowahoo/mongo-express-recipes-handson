@@ -1,0 +1,17 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+<form method="POST">
+    <div>
+        <label class="form-label">Comments for {{cuisine.name}}, ID: {{cuisine._id}}</label>
+        <p>
+        <label class="form-label">User Name</label>
+        <input type="text" name="username" class="form-control"/>
+        <label class="form-label">Comments</label>
+        <textarea class="form-control" name="comments"></textarea>
+        </p>
+    </div>
+    <input type="submit" value="Create new" class="btn btn-primary mt-3"/>
+
+</form>
+{{/block}}
+{{/extends}}
